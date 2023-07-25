@@ -1,27 +1,34 @@
-var builder = WebApplication.CreateBuilder(args);
+    using BookWeb.DataBase;
+    using Microsoft.EntityFrameworkCore;
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+    var builder = WebApplication.CreateBuilder(args);
 
-var app = builder.Build();
+    // Add services to the container.
+    builder.Services.AddControllersWithViews();
+    builder.Services.AddDbContext<ApplicationDbContext>(options=>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
 
-app.UseRouting();
+    var app = builder.Build();
 
-app.UseAuthorization();
+    // Configure the HTTP request pipeline.
+    if (!app.Environment.IsDevelopment())
+    {
+        app.UseExceptionHandler("/Home/Error");
+        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+        app.UseHsts();
+    }
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    app.UseHttpsRedirection();
+    app.UseStaticFiles();
 
-app.Run();
+    app.UseRouting();
+
+    app.UseAuthorization();
+
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    app.Run();
