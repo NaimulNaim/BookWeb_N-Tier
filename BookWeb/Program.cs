@@ -1,7 +1,7 @@
-    using BookWeb.DataBase;
-    using Microsoft.EntityFrameworkCore;
+using Book.DataAccess.DataBase;
+using Microsoft.EntityFrameworkCore;
 
-    var builder = WebApplication.CreateBuilder(args);
+   var builder = WebApplication.CreateBuilder(args);
 
     // Add services to the container.
     builder.Services.AddControllersWithViews();

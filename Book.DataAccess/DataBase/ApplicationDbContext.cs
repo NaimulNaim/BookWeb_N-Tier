@@ -1,9 +1,9 @@
-﻿using BookWeb.Models;
+﻿using Book.Models;
 using Microsoft.EntityFrameworkCore;
 
-    namespace BookWeb.DataBase
-    {
-        public class ApplicationDbContext : DbContext
+namespace Book.DataAccess.DataBase
+{
+    public class ApplicationDbContext : DbContext
         {
             public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
             {
