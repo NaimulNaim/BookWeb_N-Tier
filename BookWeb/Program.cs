@@ -1,4 +1,6 @@
 using Book.DataAccess.DataBase;
+using Book.DataAccess.Repository;
+using Book.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
    var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
     builder.Services.AddDbContext<ApplicationDbContext>(options=>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
+    builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
     var app = builder.Build();
 
@@ -29,6 +31,6 @@ using Microsoft.EntityFrameworkCore;
 
     app.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
+        pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
     app.Run();
